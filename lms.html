@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Study Materials — IT Solutions LMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="lms.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="logo" href="index.html">IT Solutions <div class="logo-badge">Student LMS</div></a>
+        <div class="user-area">
+            <a class="home-btn" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <div class="user-chip">
+                <div class="avatar" id="userAvatar">?</div>
+                <div>
+                    <div class="user-name" id="userName">Loading...</div>
+                    <div class="user-grade" id="userGrade">Grade --</div>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
+    </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label"> Study Materials </div>
+                <button class="sidebar-item active" id="tab-past" onclick="switchtab('past')">
+                    <div class="icon">📄</div> Past Papers
+                    <a class="count-badge" id="cnt-past">4</a>
+                </button>
+                <button class="sidebar-item" id="tab-model" onclick="switchtab('model')">
+                    <div class="icon">📄</div> Model Papers
+                    <a class="count-badge" id="cnt-model">3</a>
+                </button>
+                <button class="sidebar-item" id="tab-noter" onclick="switchtab('notes')">
+                    <div class="icon">📄</div> Theory Notes
+                    <a class="count-badge" id="cnt-notes">4</a>
+                </button>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">
+                    Account
+                </div>
+                <button class="sidebar-item" onclick="window.location.href='index.html'">
+                    <div class="icon">🏠</div> Main Website
+                </button>
+                <button class="sidebar-item" onclick="logout()">
+                    <div class="icon">🚪</div> Logout
+                </button>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="welcome-banner">
+                <h2>Welcome back , <a id="bannerName" style="color: gray;">Student </a> </h2>
+                <p>Your study materials are ready. Download past papers, model papers, and theory notes below.</p>
+                <div class="student-id-pill"><i class="fa-solid fa-id-card"></i> <a id="bannerID">IT-G10-0000</a>
+                </div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Past Papers (Tamil Medium)</div>
+                    <div class="stat-val"><a id="s1" style="color:rgb(5, 51, 60);">4</a> files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Model Papers (Tamil Medium)</div>
+                    <div class="stat-val"><a id="s2" style="color:rgb(5, 51, 60);">3</a> files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Theory Notes (Tamil Medium)</div>
+                    <div class="stat-val"><a id="s3" style="color: rgb(5, 51, 60);">4</a> files</div>
+                </div>
+            </div>
+            <div class="section-panel active" id="panel-past">
+                <div class="section-title">📄 Past Papers</div>
+                <div class="pdf-grid" id="grid-past"></div>
+            </div>
+            <div class="section-panel" id="panel-model">
+                <div class="section-title">📝 Model Papers</div>
+                <div class="pdf-grid" id="grid-model"></div>
+            </div>
+            <div class="section-panel" id="panel-notes">
+                <div class="section-title">📚 Theory Notes</div>
+                <div class="pdf-grid" id="grid-notes"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast"><i class="fa-solid fa-circle-check"></i> <span id="toastMsg"></span></div>
+    <script>
+        const userdata = JSON.parse(sessionStorage.getItem("lmsuser") || "null");
+        if (!userdata) { window.location.href = "login.html"; }
+
+        if (userdata) {
+            const initials = (userdata.fname ? userdata.fname[0] : userdata.name[0]).toUpperCase();
+            document.getElementById("userAvatar").textContent = initials;
+            document.getElementById("userName").textContent = userdata.fname || userdata.name;
+            document.getElementById("userGrade").textContent = userdata.grade;
+            document.getElementById("bannerName").textContent = userdata.fname || userdata.name;
+            document.getElementById("bannerID").textContent = userdata.studentid;
+        }
+
+        const materials = {
+            past: [
+                { name: "Past Paper 2024", year: "2024", size: "31.2 MB", tags: ["Grade 10", "Grade 11"], url: "20242025-OL-Information-And-Communication-Technology-Past-Paper-Tamil-Medium.pdf" },
+                { name: "Past Paper 2023", year: "2023", size: "1.46 MB", tags: ["Grade 10", "Grade 11"], url: "20232024-OL-ICT-Past-Paper-Tamil-Medium.pdf" },
+                { name: "Past Paper 2022", year: "2022", size: "0.6 MB", tags: ["Grade 10", "Grade 11"], url: "2022 ICT Past Paper.pdf" },
+                { name: "Past Paper 2021", year: "2021", size: "3.84 MB", tags: ["Grade 10", "Grade 11"], url: "2021-OL-ict-Past-Paper.pdf" },
+                { name: "Past Paper 2018", year: "2018", size: "0.8 MB", tags: ["Grade 10", "Grade 11"], url: "2018_ol_tamil.pdf" },
+                { name: "Past Paper 2017", year: "2017", size: "0.7MB", tags: ["Grade 10", "Grade 11"], url: "2017_ol_tamil.pdf" },
+                { name: "Past Paper 2016", year: "2016", size: "0.7 MB", tags: ["Grade 10", "Grade 11"], url: "2016_ol_tamil.pdf" },
+                { name: "Past Paper 2015", year: "2015", size: "0.6 MB", tags: ["Grade 10", "Grade 11"], url: "2015_ol_tamil.pdf" }
+            ],
+            model: [
+                { name: "Testing Paper 01", year: "2025", size: "0.2MB", tags: ["Grade 10"], url: "testing paper 1.0.pdf" },
+                
+            ],
+            notes: [
+                
+            ]
+        }
+        document.getElementById("cnt-past").textContent = materials.past.length;
+        document.getElementById("cnt-model").textContent = materials.model.length;
+        document.getElementById("cnt-notes").textContent = materials.notes.length;
+        document.getElementById("s1").textContent = materials.past.length;
+        document.getElementById("s2").textContent = materials.model.length;
+        document.getElementById("s3").textContent = materials.notes.length;
+        function buildgrid(key) {
+            const grid = document.getElementById("grid-" + key);
+            const list = materials[key];
+            grid.innerHTML = list.map(pdf => `
+      <div class="pdf-card">
+        <div class="pdf-top">
+          <div class="pdf-thumb">📄</div>
+          <div class="pdf-info">
+            <h4>${pdf.name}</h4>
+            <div class="meta">${pdf.year} &nbsp;·&nbsp; ${pdf.size}</div>
+          </div>
+        </div>
+        <div class="pdf-footer">
+          <div class="pdf-tags">${pdf.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+          <a class="dl-btn" href="${pdf.url}" download="${pdf.name}" onclick="showtoast('${pdf.name}')">
+            <i class="fa-solid fa-download"></i> Download
+          </a>
+        </div>
+      </div>
+    `).join("");
+        }
+
+        buildgrid("past");
+        buildgrid("model");
+        buildgrid("notes");
+        function switchtab(key) {
+            ["past", "model", "notes"].forEach(k => {
+                document.getElementById("panel-" + k).classList.toggle("active", k === key);
+                document.getElementById("tab-" + k).classList.toggle("active", k === key);
+            });
+        }
+        function logout() {
+            sessionStorage.removeItem("lmsuser");
+            window.location.href = "index.html";
+        }
+        function showtoast(name) {
+            const t = document.getElementById("toast");
+            document.getElementById("toastMsg").textContent = "Downloading: " + name;
+            t.style.opacity = "1";
+            setTimeout(() => { t.style.opacity = "0"; }, 3000);
+        }
+    </script>
+</body>
+
+</html>

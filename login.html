@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Login — IT Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+
+<body>
+    <nav>
+        <div class="nav-l">
+            <a class="logo" href="index.html">IT Solutions</a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html"><i class="fa-solid fa-house" style="font-size:12px;"></i>
+                    Home</a>
+                <a class="nav-btn" href="register.html">Register</a>
+            </div>
+        </div>
+    </nav>
+    </div>
+
+    <div class="page">
+        <div class="left-panel">
+            <div class="left-content">
+                <div class="left-badge">Student Portal</div>
+                <h1>Welcome <b style="color: gray;">back</b> to IT Solutions</h1>
+                <p>Sign in to access your study materials, past papers, model papers, and theory notes.</p>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-regular fa-file"></i>
+                    </div>
+                    <div class="feature-text">Past papers </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-regular fa-file"></i>
+                    </div>
+                    <div class="feature-text">Model papers for exam preparation</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div class="feature-text">Chapter-by-chapter theory notes</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                    <div class="feature-text">Download all materials as PDF</div>
+                </div>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div class="login-card">
+                <h2>Sign in</h2>
+                <p class="sub">Enter your username and password to continue</p>
+
+                <div class="field">
+                    <label>Username</label>
+                    <div class="input-wrap">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="lusername" placeholder="Your username"
+                            onkeydown="if(event.key==='Enter')submitlogin()">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="lpassword" placeholder="Your password" id="lpassword"
+                            onkeydown="if(event.key==='Enter')submitlogin()" />
+                        <a class="toggle-pw" onclick="togglepw()" type="button"><i class="fa-regular fa-eye"
+                                id="eyeicon"></i></a>
+                    </div>
+                </div>
+
+                <div class="error-box" id="errbox"></div>
+
+                <button class="login-btn" id="loginbtn" onclick="submitlogin()">Sign In →</button>
+
+                <div class="divider"><a>don't have an account?</a></div>
+
+                <a class="register-link-btn" href="register.html">Create Account</a>
+
+                <p class="back-link"><a href="index.html">← Back to IT Solutions</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        if (sessionStorage.getItem("lmsuser")) {
+            window.location.href = "lms.html";
+        }
+
+        function togglepw() {
+            const input = document.getElementById("lpassword");
+            const icon = document.getElementById("eyeicon");
+            if (input.type === "password") {
+                input.type = "text";
+                icon.className = "fa-regular fa-eye-slash";
+            } else {
+                input.type = "password";
+                icon.className = "fa-regular fa-eye";
+            }
+        }
+
+        function showerror(msg) {
+            const b = document.getElementById("errbox");
+            b.textContent = msg;
+            b.classList.add("show");
+        }
+        function submitlogin() {
+            document.getElementById("errbox").classList.remove("show");
+            const uname = document.getElementById("lusername").value.trim();
+            const pword = document.getElementById("lpassword").value;
+
+            if (!uname || !pword) return showerror("⚠️ Please enter your username and password.");
+
+            const students = JSON.parse(localStorage.getItem("registeredStudents") || "{}");
+            const student = students[uname];
+
+            if (!student || student.password !== pword) return showerror("❌ Incorrect username or password. Please try again.");
+
+            sessionStorage.setItem("lmsuser", JSON.stringify(student));
+            window.location.href = "lms.html";
+        }
+    </script>
+</body>
+
+</html>

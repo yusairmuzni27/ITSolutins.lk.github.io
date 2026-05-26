@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>IT Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="navigation">
+        <div class="nav-i">
+            <nav style="padding: 20px;">
+                <div class="nav-brand">
+                    <a href="#home" class="brand-logo"><b style="color: rgb(2,129,129);">IT</b> Solutions</a>
+                </div>
+                <div class="nav-menu">
+                    <button class="nav-item" onclick="goto('s1')"> Services</button>
+                    <button class="nav-item" onclick="goto('courses')"> Courses</button>
+                    <button class="nav-item" onclick="goto('contact')"> Contact</button>`
+                    <a href="login.html" class="nav-login">Student Login</a>
+                </div>
+            </nav>
+        </div>
+        <a href="login.html">Student Login</a>
+    </div>
+    <div class="header" id="home">
+        <div class="hero-left">
+            
+                <h1 style="font-size: 60px; animation:fadeIn 2s ;padding-top:60px;">IT Solutions</h1>
+                <h3 style="font-size: 35px; "> We build • We design • We teach </h3>
+                <button onclick="welcomeMsg()" style="color: rgb(2, 18, 28); background-color: rgb(222, 237, 237)">Get
+                    Started</button>
+        
+        </div>
+        <div class="hero-right">
+            <div class="hero-card card-blue">
+                <i class="fa-solid fa-code hero-card-icon" style="color:#00d4ff;"></i>
+                <h4>Development</h4>
+                <p>Modern web solutions</p>
+            </div>
+            <div class="hero-card card-purple">
+                <i class="fa-solid fa-palette hero-card-icon" style="color:#a855f7;"></i>
+                <h4>Design</h4>
+                <p>Creative visuals</p>
+            </div>
+            <div class="hero-card card-yellow">
+                <i class="fa-solid fa-graduation-cap hero-card-icon" style="color:#708616;"></i>
+                <h4>Tutoring</h4>
+                <p>Expert training</p>
+            </div>
+            <div class="hero-card card-teal">
+                <i class="fa-solid fa-award hero-card-icon" style="color:#10b981;"></i>
+                <h4>Quality</h4>
+                <p>Excellence guaranteed</p>
+            </div>
+        </div>
+    </div>
+    <section class="section" id="s1">
+        <h1 style="margin-top: 750px; ">Our premium Services</h1><br>
+        <div class="services">
+            <div class="card">
+                <div class="card-img">
+                <img src="web developing.png">
+                </div>
+                <div class="card-content">
+                <i class="fa-solid fa-laptop-code" style="padding-top: 10px;"></i>
+                <h3 >Web Development</h3>
+                <p>We create modern, fast, and user-friendly websites for businesses and individuals. Our websites
+                    are designed to look good and work smoothly on all devices.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                <img src="Graphic Designing.png">
+                </div>
+                <div class="card-content">
+                <i class="fa-solid fa-bezier-curve"  style="padding-top: 10px;"></i>
+                <h3>Graphic Designing</h3>
+                <p>We design creative and attractive visuals such as logos, posters, and social media designs to
+                    help your brand stand out</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                <img src="IT Tutoring.png">
+                </div>
+                <i class="fa-brands fa-readme"  style="padding-top: 10px;"  ></i>
+                <h3>IT Tutoring</h3>
+                <p>We provide easy-to-understand IT lessons to help students learn skills like coding, web
+                    development, and basic computer knowledge.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" style="margin-top: 40px;">
+        <h2>Get Started</h2>
+        <div class="services">
+            <div class="card">
+                <h4>Web Development</h4>
+                <p>Get a token and start your project with us</p>
+                <button onclick="opentokenpopup('Web Development')">Get Token</button>
+            </div>
+            <div class="card">
+                <h4>Graphic Designing</h4>
+                <p>Book your design services easily with a token system </p>
+                <button onclick="opentokenpopup('Graphic Designing')">Get Token</button>
+            </div>
+        </div>
+    </section>
+    <section class="section" style="margin-top: 40px;" id="courses">
+        <h2>Our Courses</h2>
+        <div class="services">
+            <div class="card">
+                <h4>ICT Classes for Grade 10</h4>
+                <p>Join our classes and improve your IT skills(Local Syllabus)</p>
+                <button onclick="window.location.href='register.html?grade=Grade 10'">Register</button>
+            </div>
+            <div class="card">
+                <h4>ICT Classes for Grade 11</h4>
+                <p>Join our classes and improve your IT skills(Local Syllabus)</p>
+                <button onclick="window.location.href='register.html?grade=Grade 11'">Register</button>
+            </div>
+        </div>
+    </section>
+    <div class="section" style="margin-top: 30px;">
+        <h2> Study Materials</h2>
+        <div class="services">
+            <div class="card">
+                <h4>Past Papers</h4>
+                <p>Practice previous exam questions</p>
+                <button onclick="window.location.href='login.html'">Open →</button>
+            </div>
+            <div class="card">
+                <h4>Model Papers</h4>
+                <p>Try our specially prepared model papers</p>
+                <button onclick="window.location.href='login.html'">Open →</button>
+            </div>
+            <div class="card">
+                <h4>Theory Notes</h4>
+                <p>Easy notes for quick learning</p><br>
+                <button onclick="window.location.href='login.html'">Open →</button>
+            </div>
+        </div>
+        <div class="register-bar">
+            <div>
+                <p style="color:white; font-weight:bold; font-size:16px; margin-bottom:4px;">Don't have an account yet?
+                </p>
+                <p style="color:rgba(255,255,255,0.65); font-size:13px;">
+                    Register for free and get your student ID instantly
+                </p>
+            </div>
+            <a href="register.html">Register now →</a>
+        </div>
+        <section class="section" id="contact">
+            <div class="info">
+                <h2><b>Contact Us</b></h2>
+                <p>Got a question or suggestion? Reach out to us anytime! we’re always here to support you 24/7.</p><br>
+                <hr>
+                <div class="c1">
+                    <i class="fa-regular fa-envelope"></i>
+                    <p style="color: gray;">Get in Touch With Our Team</p>
+                    <p>ITSolutions.lk@hotmail.com</p><br>
+                    <hr>
+                </div>
+                <div class="c1">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <p style="color: gray;">Reach Us by Whatsapp</p>
+                    <P>(+94)742860079</P><br>
+                    <hr>
+                </div>
+                <div class="c1">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p style="color: gray;">Find Us Here</p>
+                    <P>197/8 IL Lane,Galbokka,Weligama</P><br>
+                </div>
+            </div>
+            <div class="form">
+                <h2><b>Feel free to send any message</h2></b><br>
+                <form id="contactform" onsubmit="sendMessage(event)">
+                    <input type="text" placeholder="Enter your Name" required><br>
+                    <input type="email" placeholder="Enter your Email" required><br>
+                    <input type="tel" placeholder="Enter your Whatsapp Number" required><br>
+                    <textarea placeholder="Type message here"></textarea><br>
+                    <button type="submit">Submit</button>
+                    <div id="successMsg"
+                        style="display: none; background-color: rgb(5, 90, 68);color: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        Message sent succesfully!We will contact you soon.
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="tokenpopup">
+            <div id="box">
+                <span onclick="closepopup()">X</span>
+                <h2 id="popuptitle" style="color: rgb(2,129,129); margin-bottom: 15px;">Get Token</h2>
+                <div id="tokenformdiv">
+                    <input type="text" id="tokenName" placeholder="Enter Your name" required><br>
+                    <input type="email" id="tokenEmail" placeholder="Enter Your Email Address" required><br>
+                    <input type="tele" id="tokenPhone" placeholder="Enter Your Whatsapp Number" required><br>
+                    <textarea id="tokenDesc" placeholder="discribe your work briefly" required></textarea><br>
+                    <button onclick="generateToken()">Get My Token</button>
+                </div>
+                <div id="tokenSuccess" style="display: none;">
+                    <div style="font-size: 60px;">🎉</div>
+                    <h3 style="color: greenyellow; margin: 10px 0;">Token Generated</h3>
+                    <p style="color: gray;">We will contact you soon !</p>
+                    <button onclick="closepopup()">Done✅</button>
+                    <div id="tokenNumber"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer_box">
+            <h2 style="margin-bottom: 15px; text-align: left; color: yellow;">IT Solutions</h2>
+            <p style="margin-bottom: 15px;">We provide innovative IT solutions to help your business grow and
+                succeed in the digital world.</p>
+        </div>
+        <hr class="vertical-line">
+        <div class="footer_box">
+            <div class="link">
+                <h2 style="margin-bottom: 15px; text-align: left; color: yellow;">Quick Links</h2>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#s1">Service</a></li>
+                    <li><a href="#courses">Course</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>  
+
+        <hr class="vertical-line">
+        <div class="footer_box">
+            <div class="work">
+                <h2 style="margin-bottom: 15px; text-align: left; color: yellow;">Our Services</h2>
+                <ul>
+                    <li>Web Developing</li>
+                    <li>Graphic Designing</li>
+                    <li>IT Tutoring</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="vertical-line">
+        <div class="footer_box">
+
+            <h2 style="margin-bottom: 15px; text-align: left; color: yellow;">Follow Us</h2>
+            <div class="icon">
+                <a href="https://wa.me/94742860079" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+                <a href="https://www.instagram.com/it_solutions.lk?igsh=MXFpM2hjY25uZmswcw==" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="https://www.facebook.com/share/1ViQBL9Gyp/" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
+                <a href="mailto:ITSolutions.lk@hotmail.com">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <div class="bottom">
+        <hr>
+        <p style="padding-top: 10px;">© 2026 IT Solutions. All Rights Reserved.</p>
+    </div>
+
+
+    <script>
+        window.addEventListener("scroll", function () {
+            let navbar = document.querySelector(".navigation");
+
+            if (window.scrollY > 700) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+        function welcomeMsg() {
+            alert('Welcome to IT Solutions!')
+        }
+        function goto(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" })
+        }
+        document.getElementById("contactform").addEventListener("submit", function (e) {
+            e.preventDefault();
+            document.getElementById("successMsg").style.display = "block";
+            this.reset();
+            setTimeout(function () {
+                document.getElementById("successMsg").style.display = "none";
+            }, 4000)
+        })
+
+        const SHEET_URL = "https://script.google.com/macros/s/AKfycbxfQNI5LSU39rRyJ51ZKHDnkFWD3qHvz40mGECBKqfLHPGPEFrHabwA3IubqWXVXDhrXw/exec"
+        let currentService = "";
+        function opentokenpopup(serviceName) {
+            currentService = serviceName;
+            document.getElementById("popuptitle").innerText =
+                "Get Token - " + serviceName;
+            document.getElementById("tokenpopup").style.display = "flex";
+            document.getElementById("tokenformdiv").style.display = "block";
+            document.getElementById("tokenSuccess").style.display = "none";
+        }
+
+        function closepopup() {
+            document.getElementById("tokenpopup").style.display = "none";
+            document.getElementById("tokenName").value = "";
+            document.getElementById("tokenEmail").value = "";
+            document.getElementById("tokenPhone").value = "";
+            document.getElementById("tokenDesc").value = "";
+        }
+        function generateToken() {
+            let name = document.getElementById("tokenName").value;
+            let email = document.getElementById("tokenEmail").value;
+            let phone = document.getElementById("tokenPhone").value;
+            if (!name || !email || !phone) {
+                alert("Please fill all fields")
+                return;
+            }
+            let count = localStorage.getItem("TokenCount") || 0;
+            count = parseInt(count) + 1;
+            localStorage.setItem("TokenCount", count);
+
+            let tokenNum = "T-" + String(count).padStart(3, "0");
+            document.getElementById("tokenformdiv").style.display = "none";
+            document.getElementById("tokenSuccess").style.display = "block";
+            document.getElementById("tokenNumber").innerText = tokenNum;
+
+            sendToGoogleSheet(name, email, phone, tokenNum);
+        }
+
+        function sendToGoogleSheet(name, email, phone, tokenNum) {
+            let desc = document.getElementById("tokenDesc").value;
+
+            fetch(SHEET_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    token: tokenNum,
+                    service: currentService,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    description: desc
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        console.log("✅ Saved to Google Sheet!");
+                    } else {
+                        console.log("❌ Something went wrong!");
+                    }
+                })
+                .catch(error => {
+                    console.log("❌ Error!", error);
+                });
+        }
+        document.getElementById("tokenformdiv").addEventListener("submit", function (e) {
+            e.preventDefault();
+            document.getElementById("successMsg").style.display = "block";
+            this.reset();
+            setTimeout(function () {
+                document.getElementById("successMsg").style.display = "none";
+            }, 4000);
+        });
+
+        function togglemenu() {
+    const menu = document.getElementById("navmenu");
+    menu.classList.toggle("open");
+}
+
+
+document.querySelectorAll(".nav-item").forEach(item => {
+    item.addEventListener("click", () => {
+        document.getElementById("navmenu").classList.remove("open");
+    });
+});
+    </script>
+</body>
+
+</html>

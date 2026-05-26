@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Register — IT Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="register.css">
+
+</head>
+<body>
+
+    <nav>
+        <div class="nav-r">
+            <a class="logo" href="index.html">IT Solutions</a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html"><i class="fa-solid fa-house" style="font-size:12px;"></i>
+                    Home</a>
+                <a class="nav-link" href="login.html">Sign In</a>
+                <a class="nav-btn" href="index.html#courses">View Courses</a>
+            </div>
+        </div>
+    </nav>
+    <div class="page">
+        <div class="left-panel">
+            <div class="left-content">
+                <div class="left-badge">Student Registration</div>
+                <h1>Start your <b >IT journey</b> Today!</h1>
+                <p>Build your future in technology by learning web development, programming, and IT skills with expert
+                    guidance.</p>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                                        <i class="fa-solid fa-paperclip"></i>
+
+                    </div>
+                    <div class="benefit-text">Access past papers, model papers & theory notes</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="benefit-text">Grade 10 & Grade 11 local syllabus coverage</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fa-regular fa-id-badge"></i>
+                    </div>
+                    <div class="benefit-text">Get your unique Student ID instantly</div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                    <i class="fa-brands fa-rocketchat"></i>
+                    </div>
+                    <div class="benefit-text">We contact you via WhatsApp after registration</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="right-panel">
+            <div class="form-header">
+                <h2 style="padding-top: 30px;">Create your account</h2>
+                <p>Fill in the details below to register and get your Student ID</p>
+            </div>
+            <div class="form-content" id="formContent">
+                <div class="grade-label">Select your grade</div>
+                <div class="grade-selector">
+                    <button class="grade-btn" id="g10btn" onclick="selectgrade('Grade 10')"> Grade 10</button>
+                    <button class="grade-btn" id="g11btn" onclick="selectgrade('Grade 11')"> Grade 11</button>
+                </div>
+                <div class="form-grid">
+                    <div class="field">
+                        <label>First name</label>
+                        <input type="text" id="fname" placeholder="FirstName" required />
+                    </div>
+                    <div class="field">
+                        <label>Last name</label>
+                        <input type="text" id="lname" placeholder="LastName" required />
+                    </div>
+                    <div class="field full">
+                        <label>Email address</label>
+                        <input type="email" id="remail" placeholder="abc@gmail.com" required />
+                    </div>
+                    <div class="field">
+                        <label>WhatsApp number</label>
+                        <input type="tel" id="rphone" placeholder="07X XXX XXXX" required />
+                    </div>
+                    <div class="field">
+                        <label>School name</label>
+                        <input type="text" id="rschool" placeholder="ABC College" required />
+                    </div>
+                </div>
+                <div class="section-divider"><a>Create login credentials</a></div>
+                <div class="form-grid">
+                    <div class="field full">
+                        <label>Username</label>
+                        <input type="text" id="rusername" placeholder="FirstName_LastName"
+                            oninput="checkusername(this)" />
+                        <span class="hint" id="uname-hint"></span>
+                    </div>
+                    <div class="field full">
+                        <label>Password</label>
+                        <input type="password" id="rpassword" placeholder="Create a strong password"
+                            oninput="checkstrength(this)" />
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="sbar"></div>
+                        </div>
+                        <span class="hint" id="strength-hint"></span>
+                    </div>
+                    <div class="field full">
+                        <label>Confirm password</label>
+                        <input type="password" id="rconfirm" placeholder="Repeat password" />
+                    </div>
+                    <div class="error-box" id="errbox"></div>
+                    <button class="submit-btn" id="submitbtn" onclick="submitregister()">Get My Student ID</button>
+                    <p class="login-link">Already have an account? <a href="login.html">Sign in here</a></p>
+                </div>
+            </div>
+            <div class="success-screen" id="successScreen">
+                <div class="success-emoji">🎉</div>
+                <h3>Registered Successfully!</h3>
+                <p>Welcome to IT Solutions! We'll reach out via WhatsApp soon.</p>
+                <div class="student-id-box">
+                    <div class="id-label">Your Student ID</div>
+                    <div class="id" id="displayID">IT-G10-0000</div>
+                </div>
+                <button class="done-btn" onclick="window.location.href='lms.html'">
+                    Go to Study Materials →
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+    const EMAILJS_SERVICE_ID  = "service_x3nwjdc";
+    const EMAILJS_TEMPLATE_ID = "template_maen60m";
+    const EMAILJS_PUBLIC_KEY  = "d6jEhC1g90Rbab3My";
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    let selectedgrade = "";
+     window.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const gradeFromURL = urlParams.get("grade");
+        if (gradeFromURL) selectgrade(gradeFromURL);
+    });
+
+    function selectgrade(g) {
+        selectedgrade = g;
+        document.getElementById("g10btn").classList.toggle("selected", g === "Grade 10");
+        document.getElementById("g11btn").classList.toggle("selected", g === "Grade 11");
+    }
+
+    function checkusername(input) {
+        const hint = document.getElementById("uname-hint");
+        const v = input.value.trim();
+        if (!v) { hint.textContent = ""; return; }
+        const existing = JSON.parse(localStorage.getItem("registeredStudents") || "{}");
+        if (existing[v])      { hint.textContent = "✗ Username already taken"; hint.className = "hint hint-err"; }
+        else if (v.length < 3){ hint.textContent = "Minimum 3 characters";     hint.className = "hint"; }
+        else                  { hint.textContent = "✓ Username available";      hint.className = "hint hint-ok"; }
+    }
+    function checkstrength(input) {
+        const v = input.value;
+        const bar  = document.getElementById("sbar");
+        const hint = document.getElementById("strength-hint");
+        let score = 0;
+        if (v.length >= 8)          score++;
+        if (/[A-Z]/.test(v))        score++;
+        if (/[0-9]/.test(v))        score++;
+        if (/[^a-zA-Z0-9]/.test(v)) score++;
+        const levels = [
+            { w:"0%",   c:"transparent", t:"" },
+            { w:"25%",  c:"#ef4444",     t:"Weak" },
+            { w:"50%",  c:"#f59e0b",     t:"Fair" },
+            { w:"75%",  c:"#3b82f6",     t:"Good" },
+            { w:"100%", c:"#22c55e",     t:"Strong" }
+        ];
+        bar.style.width      = levels[score].w;
+        bar.style.background = levels[score].c;
+        hint.textContent     = levels[score].t;
+        hint.style.color     = levels[score].c;
+    }
+    function showerror(msg) {
+        const b = document.getElementById("errbox");
+        b.textContent = msg;
+        b.classList.add("show");
+    }
+    function hideerror() {
+        document.getElementById("errbox").classList.remove("show");
+    }
+    async function submitregister() {
+        hideerror();
+        const fname    = document.getElementById("fname").value.trim();
+        const lname    = document.getElementById("lname").value.trim();
+        const email    = document.getElementById("remail").value.trim();
+        const phone    = document.getElementById("rphone").value.trim();
+        const school   = document.getElementById("rschool").value.trim();
+        const username = document.getElementById("rusername").value.trim();
+        const password = document.getElementById("rpassword").value;
+        const confirm  = document.getElementById("rconfirm").value;
+
+        if (!selectedgrade)                             return showerror("⚠️ Please select your grade.");
+        if (!fname || !lname)                           return showerror("⚠️ Please enter your full name.");
+        if (!email)                                     return showerror("⚠️ Please enter your email.");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showerror("⚠️ Please enter a valid email.");
+        if (!phone)                                     return showerror("⚠️ Please enter your WhatsApp number.");
+        if (!school)                                    return showerror("⚠️ Please enter your school name.");
+        if (!username || username.length < 3)           return showerror("⚠️ Username must be at least 3 characters.");
+        const existing = JSON.parse(localStorage.getItem("registeredStudents") || "{}");
+        if (existing[username])                         return showerror("⚠️ That username is already taken.");
+        if (password.length < 6)                        return showerror("⚠️ Password must be at least 6 characters.");
+        if (password !== confirm)                       return showerror("⚠️ Passwords do not match.");
+
+         const gradeCode = selectedgrade.replace("Grade ", "G");
+        const studentID = "IT-" + gradeCode + "-" + Math.floor(1000 + Math.random() * 9000);
+
+        const btn = document.getElementById("submitbtn");
+        btn.textContent = "Sending...";
+        btn.disabled = true;
+
+        existing[username] = {
+            name: fname + " " + lname,
+            fname, lname, email, phone, school,
+            username, password,
+            grade: selectedgrade,
+            studentid: studentID
+        };
+        localStorage.setItem("registeredStudents", JSON.stringify(existing));
+
+        try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                name: fname + " " + lname,
+                email, phone, school,
+                grade: selectedgrade,
+                username, studentid: studentID,
+                time: new Date().toLocaleString()
+            });
+        } catch (e) {
+            console.warn("EmailJS:", e);
+        }
+        sessionStorage.setItem("lmsuser", JSON.stringify(existing[username]));
+        document.getElementById("displayID").textContent = studentID;
+        document.getElementById("formContent").classList.add("hide");
+        document.getElementById("successScreen").classList.add("show");
+    }
+    </script>
+</body>
+</html>
